@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <div className='flex justify-between items-center py-10'>
         <Link href="/">
-            <button className='text-lg font-medium'>CYJ twitter</button>
+            <button className='text-3xl font-bold'>Home</button>
         </Link>
         <ul className='flex items-center gap-4'>
         {!user &&  
@@ -20,11 +20,13 @@ const Nav = () => {
         }
         {user &&  
           <>
-            <Link href="/login">
-              <a className='py-2 px-4 text-sm bg-zinc-700 text-white rounded-lg font-medium'>글 쓰기</a>
+            <Link href="/post">
+              <a className='py-2 px-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm text-center mr-2 mb-2'>글 쓰기</a>
             </Link>
-            <Link href="/login">
-              <a className='py-2 px-4 text-sm bg-zinc-700 text-white rounded-lg font-medium '>User</a>
+            <Link href="/dashboard">
+              <a >
+                <img className='h-14 w-14 rounded-full'src={user.photoURL} alt="user" />
+              </a>
             </Link>
           </>  
         }

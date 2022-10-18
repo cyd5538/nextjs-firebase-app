@@ -1,7 +1,27 @@
 import Head from 'next/head'
-
+import { useEffect, useState } from 'react'
+import {db} from '../utils/firebase';
+import { orderBy, collection, query, onSnapshot } from 'firebase/firestore';
+import Link from 'next/link'
+import PostItem from '../components/PostItem';
 
 export default function Home() {
+  const [allposts, setAllposts] = useState([]);
+
+    // 모든 포스트 가져오기
+    const getPosts = async () => {
+      const collectionRef = collection(db, "posts");
+      const q = query(collectionRef, orderBy("timestamp", "desc"));
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        setAllposts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      });
+      return unsubscribe;
+    };
+  
+    useEffect(() => {
+      getPosts();
+    }, []);
+
   return (
     <div>
       <Head>
@@ -11,10 +31,17 @@ export default function Home() {
       </Head>
 
       <main>
-
+      <div className='my-12 text-lg font-midium'>
+        <h2 className='text-2xl font-bold text-cyan-800'>모든 포스트 🎉</h2>
+        {allposts?.map((post) => (
+          <PostItem key={post.id} {...post}>
+            <button type="button" className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+              Comment
+            </button>
+          </PostItem>
+        ))}
+      </div>
       </main>
-
-
     </div>
   )
 }
