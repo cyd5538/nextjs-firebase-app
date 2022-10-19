@@ -20,11 +20,11 @@ const Dashboard = () => {
       route.push('/')
     }
   },[])
-
+console.log(user)
 const getData = async () => {
     if (loading) return;
     const collectionRef = collection(db, "posts");
-    const q = query(collectionRef, where("user", "==", user.uid));
+    const q = query(collectionRef, where("user", "==", user?.uid));
     const unsubscribe = onSnapshot(q, (snapshot) => {
         setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -43,7 +43,7 @@ useEffect(() => {
 }, [user, loading])
 
   return (
-    <div>
+    <div className="pb-4">
       <DashboardProfileEdit />
       <div>
         <h1 className="font-bold text-xl mt-12">My Post</h1>

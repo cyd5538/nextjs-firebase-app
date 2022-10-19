@@ -1,6 +1,7 @@
 import React from 'react'
 
 const DashboardMypost = ({children, avatar, userName, text}) => {
+    console.log(children, avatar, userName, text, 11)
     return (
         <div className='bg-white p-8 border-b-2 rounded-lg'>
             <div className='flex items-center gap-2'>

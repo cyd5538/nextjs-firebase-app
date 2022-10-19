@@ -32,12 +32,9 @@ export default function Home() {
 
       <main>
       <div className='my-12 text-lg font-midium'>
-        <h2 className='text-2xl font-bold text-cyan-800'>모든 포스트 🎉</h2>
+        <h2 className='text-2xl font-bold text-cyan-800 mb-8'>모든 포스트 🎉</h2>
         {allposts?.map((post) => (
           <PostItem key={post.id} {...post}>
-            <button type="button" className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-              Comment
-            </button>
           </PostItem>
         ))}
       </div>
