@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {db} from '../utils/firebase';
 import { orderBy, collection, query, onSnapshot } from 'firebase/firestore';
 import Link from 'next/link'
-import PostItem from '../components/PostItem';
+import PostItem from '../components/post/PostItem';
 
 export default function Home() {
   const [allposts, setAllposts] = useState([]);

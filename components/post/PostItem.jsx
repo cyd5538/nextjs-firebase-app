@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PostItem = ({children, avatar, username, caption, image}) => {
+const PostItem = ({avatar, username, caption, image}) => {
 
   return (
     <div className='mb-8 p-6 max-w-md m-auto bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>

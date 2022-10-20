@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { auth } from "../utils/firebase";
+    import { auth, storage } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { updateProfile,signOut } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { useRouter } from 'next/router';
 import {toast} from 'react-toastify'
-import {storage} from '../utils/firebase'
 
-const DashboardProfileEdit = () => {
+
+const ProfileImageEdit = () => {
     const [user, loading] = useAuthState(auth);
     const [photo, setPhoto] = useState(null);
     const [loadings, setLoadings] = useState(false);
@@ -44,30 +44,12 @@ const DashboardProfileEdit = () => {
       upload(photo, user, setLoadings);
     }
 
-    // 로그아웃 
-    function logout(){
-        return signOut(auth);
-    }
-    
-    const handleLogout = async () => {
-        try {
-          await logout();
-          route.push('/login')
-        } catch {
-          console.log("error");
-        }
-    };
+
 
     return (
         <div>
             <div className="flex items-center justify-end">
-                <button
-                onClick={handleLogout}
-                type="button"
-                className="text-white mt-4 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-                >
-                    Logout
-                </button>
+
             </div>
             <div className="font-bold text-xl mt-20">Profile Image</div>
             {/* photoURL이 없을떄에는 기존 아바타 가져와서 적용 있을때는 프로필 사진 보여주기 */}
@@ -108,4 +90,4 @@ const DashboardProfileEdit = () => {
     )
 }
 
-export default DashboardProfileEdit;
+export default ProfileImageEdit;

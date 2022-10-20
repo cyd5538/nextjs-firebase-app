@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import {auth} from '../utils/firebase';
+import {auth} from '../../utils/firebase';
 import {useAuthState} from 'react-firebase-hooks/auth'; 
+import NavbarDropdown from './NavbarDropdown';
 
 
 const Nav = () => {
@@ -21,16 +22,13 @@ const Nav = () => {
         {user &&  
           <>
             <Link href="/post">
-              <a className='py-2 px-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm text-center mr-2 mb-2'>글 쓰기</a>
+              <li className='py-2 px-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm text-center mr-2 mb-2'>글 쓰기</li>
             </Link>
-            <Link href="/dashboard">
-              <a >
-                <img className='h-14 w-14 rounded-full'src={user.photoURL} alt="user" />
-              </a>
-            </Link>
+            <NavbarDropdown />
           </>  
         }
       </ul>
+
     </div>
   )
 }
