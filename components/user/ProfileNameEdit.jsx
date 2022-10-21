@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { Dialog, Transition } from '@headlessui/react'
-
+import { toast } from 'react-toastify';
 
 const ProfileNameEdit = () => {
     const [user, loading] = useAuthState(auth);
@@ -11,8 +11,26 @@ const ProfileNameEdit = () => {
     let [isOpen, setIsOpen] = useState(false)
  
     async function upload() {
-        await updateProfile(user, {displayName: name})
-        setIsOpen(false);
+        if(name.indexOf(" ") !== -1){
+            return toast.error("공백을 없애주세요 ❗",{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            })
+            
+        }else if(name.length < 3){
+            return toast.error("이름은 3글자 이상입니다 ❗",{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            })
+        }else{
+            await updateProfile(user, {displayName: name})
+            setName("");
+            toast.success("성공적으로 변경됐습니다 👌",{
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 1500,
+            })
+            setIsOpen(false);
+        }  
     }
    
 
@@ -69,7 +87,9 @@ const ProfileNameEdit = () => {
 
                         <div className="mt-2">
                         <p className="flex w-full items-center justify-around m-auto gap-6">
-                            <input 
+                            <input
+                            maxLength={8}
+                            minLength={3} 
                             type="text" 
                             id="first_name" 
                             value={name} onChange={(e) => setName(e.target.value)}

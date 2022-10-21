@@ -35,6 +35,11 @@ export default function Home() {
         <h2 className='text-2xl font-bold text-cyan-800 mb-8'>모든 포스트 🎉</h2>
         {allposts?.map((post) => (
           <PostItem key={post.id} {...post}>
+            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+            <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+              Comment
+            </button>
+            </Link>
           </PostItem>
         ))}
       </div>

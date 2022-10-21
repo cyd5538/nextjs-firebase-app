@@ -22,7 +22,7 @@ const Nav = () => {
         {user &&  
           <>
             <Link href="/post">
-              <li className='py-2 px-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm text-center mr-2 mb-2'>글 쓰기</li>
+              <li className='cursor-pointer py-2 px-4 text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm text-center mr-2 mb-2'>글 쓰기</li>
             </Link>
             <NavbarDropdown />
           </>  

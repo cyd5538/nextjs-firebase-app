@@ -134,7 +134,7 @@ export default function Post() {
           ></img>
         )}
         <input
-          type="file"
+          type="file" 
           hidden
           ref={filePickerRef}
           onChange={addImageToPost}

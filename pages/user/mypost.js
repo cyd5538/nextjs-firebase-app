@@ -15,11 +15,11 @@ const myPost = () => {
         const collectionRef = collection(db, "posts");
         const q = query(collectionRef, where("user", "==", user?.uid));
         const unsubscribe = onSnapshot(q, (snapshot) => {
-            setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })).sort((a,b) => b.timestamp - a.timestamp));
         });
         return unsubscribe;
     };
-    
+
 
     useEffect(() => {
       getData();
