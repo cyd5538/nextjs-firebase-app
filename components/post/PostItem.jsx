@@ -18,11 +18,8 @@ const PostItem = ({children, avatar, username, caption, text, image}) => {
             <img src={avatar} className="w-12 h-12 rounded-full" />
             <h2 className='font-500 text-sm'>{username}</h2>
           </div>
-          <div>
-            {children}
-          </div>
       </div>
-      
+      {children}
     </div>
   )
 }
