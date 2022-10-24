@@ -4,13 +4,15 @@ import PostItem from '../components/post/PostItem';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth, db } from '../utils/firebase';
 import { toast } from 'react-toastify';
-import { arrayUnion, Timestamp, updateDoc, doc, getDoc } from 'firebase/firestore';
+import { arrayUnion, Timestamp, updateDoc, doc, getDoc, deleteField, arrayRemove } from 'firebase/firestore';
 import Comment from '../components/slug/Comment';
+import { AiOutlineDelete,AiOutlineEdit } from "react-icons/ai";
 
 const PostDetails = () => {
   const [user, loading] = useAuthState(auth);
   const [message, setMessage] = useState('')
   const [allMessages, setAllMessages] = useState([]);
+  const [messageEdit, setMessageEdit] = useState('');
   const router = useRouter();
   const routeData = router.query;
 
@@ -18,11 +20,17 @@ const PostDetails = () => {
   const submitMessage = async() => {
     
     //로그인 안되어있으면
-    if(!user) return router.push('/auth/login');
+    if(!user){
+      toast.error("로그인이 필요합니다 👏",{
+        position: toast.POSITION.TOP_CENTER,
+        duration: 1000
+    })
+      return router.push('/login');
+    } 
 
     // 메세지 비어있으면
     if(!message){
-        toast.error("Dont't leave an empty message 🕳",{
+        toast.error("메세지를 입력해주세요 🕳",{
             position: toast.POSITION.TOP_CENTER,
             duration: 1000
         })
@@ -35,11 +43,34 @@ const PostDetails = () => {
             message,
             avatar: user.photoURL,
             userName : user.displayName,
-            time : Timestamp.now()
+            time : Timestamp.now(),
+            user: user.uid
+        }),
+        sibal : arrayUnion({
+          message: "1",
+          avatar: "2",
+          time : Timestamp.now()
         })
     })
     setMessage(''); 
     }
+
+    // Delete Post
+    const deleteComment = async(id,message) => {
+      const docRef = doc(db, 'posts', routeData.id)
+      await updateDoc(docRef, {
+        comments: arrayRemove({
+          message,
+          avatar: user.photoURL,
+          userName : user.displayName,
+          time : id,
+          user: user.uid
+        }),
+        
+      })
+      getComments()
+    }
+    
 
     
     // 코멘트 가져오기
@@ -55,6 +86,7 @@ const PostDetails = () => {
       if(!router.isReady) return;
       getComments();
     },[ message ])
+
 
   return (
     <div>
@@ -74,7 +106,7 @@ const PostDetails = () => {
                 </div>
                 <div className='py-6'>
                     <h2 className='font-bold'>Comments</h2>
-                    {allMessages.map((message) => (
+                    {allMessages?.map((message) => (
                       <Comment 
                         key={message.time}
                         avatar={message.avatar}
@@ -82,7 +114,16 @@ const PostDetails = () => {
                         message={message.message}
                         time={message.time}
                       >
-
+                        {user?.uid === message.user ? 
+                        (
+                          <>
+                            <button className='mr-2' onClick={() => deleteComment(message.time,message.message)}><AiOutlineDelete /></button>
+                            <button><AiOutlineEdit /></button>
+                          </>
+                        ) :
+                        (
+                          <></>
+                        )} 
                       </Comment>
                     ))}
                 </div>

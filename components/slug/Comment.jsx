@@ -6,7 +6,7 @@ const Comment = ({children,avatar,username,message,time}) => {
     <div className='bg-white p-4 my-4 border-2'>
         <div className='flex items-center justify-between gap-2'>
             <h2 className='w-2/3 h-auto'>{message}</h2>
-            <div className='flex'>
+            <div className='flex gap-1'>
                 <img className='w-6 rounded-full' src={avatar} alt="" /> 
                 <h2 className='font-500 text-gray-500'>{username}</h2>
             </div>

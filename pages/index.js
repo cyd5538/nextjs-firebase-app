@@ -4,6 +4,7 @@ import {db} from '../utils/firebase';
 import { orderBy, collection, query, onSnapshot } from 'firebase/firestore';
 import Link from 'next/link'
 import PostItem from '../components/post/PostItem';
+import { comment } from 'postcss';
 
 export default function Home() {
   const [allposts, setAllposts] = useState([]);
@@ -19,9 +20,9 @@ export default function Home() {
     };
   
     useEffect(() => {
-      getPosts();
+      getPosts(allposts);
     }, []);
-
+    console.log(allposts);
   return (
     <div>
       <Head>
@@ -37,7 +38,7 @@ export default function Home() {
           <PostItem key={post.id} {...post}>
             <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
             <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-              Comment
+              Comment <span className="font-bold">{post.comments.length}</span>
             </button>
             </Link>
           </PostItem>

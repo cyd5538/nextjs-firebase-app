@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import MypostEdit from "../../components/user/MypostEdit";
-import { collection, deleteDoc, onSnapshot, query, where, doc } from 'firebase/firestore';
+import { collection, onSnapshot, query, where,  } from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth,db } from "../../utils/firebase";
 import { AiFillEdit } from 'react-icons/ai';
@@ -13,7 +13,7 @@ const myPost = () => {
     const getData = async () => {
         if (loading) return;
         const collectionRef = collection(db, "posts");
-        const q = query(collectionRef, where("user", "==", user?.uid));
+        const q = query(collectionRef, where("user", "==", user?.uid))
         const unsubscribe = onSnapshot(q, (snapshot) => {
             setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })).sort((a,b) => b.timestamp - a.timestamp));
         });
