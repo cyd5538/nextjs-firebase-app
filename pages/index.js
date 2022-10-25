@@ -22,7 +22,7 @@ export default function Home() {
     useEffect(() => {
       getPosts(allposts);
     }, []);
-    console.log(allposts);
+console.log(allposts)
   return (
     <div>
       <Head>
@@ -33,16 +33,18 @@ export default function Home() {
 
       <main>
       <div className='my-12 text-lg font-midium'>
-        <h2 className='text-2xl font-bold text-cyan-800 mb-8'>모든 포스트 🎉</h2>
-        {allposts?.map((post) => (
-          <PostItem key={post.id} {...post}>
-            <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
-            <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
-              Comment <span className="font-bold">{post.comments.length}</span>
-            </button>
-            </Link>
-          </PostItem>
-        ))}
+
+        <div className='flex gap-1 flex-wrap justify-around'>
+          {allposts?.map((post) => (
+            <PostItem key={post.id} {...post}>
+              <Link href={{ pathname: `/${post.id}`, query: { ...post } }}>
+              <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                Comment <span className="font-bold">{post.comments?.length}</span>
+              </button>
+              </Link>
+            </PostItem>
+          ))}
+        </div>
       </div>
       </main>
     </div>
