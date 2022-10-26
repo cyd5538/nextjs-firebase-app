@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/router';
-import PostItem from '../components/post/PostItem';
+import SlugItem from '../components/slug/SlugItem';
 import { useAuthState } from "react-firebase-hooks/auth";
 import {auth, db } from '../utils/firebase';
 import { toast } from 'react-toastify';
@@ -16,7 +16,8 @@ const PostDetails = () => {
   const router = useRouter();
   const routeData = router.query;
 
-
+  console.log(routeData)
+  
   const submitMessage = async() => {
     
     //로그인 안되어있으면
@@ -46,11 +47,6 @@ const PostDetails = () => {
             time : Timestamp.now(),
             user: user.uid
         }),
-        sibal : arrayUnion({
-          message: "1",
-          avatar: "2",
-          time : Timestamp.now()
-        })
     })
     setMessage(''); 
     }
@@ -85,13 +81,14 @@ const PostDetails = () => {
       // useEffect 메소드 내에서만 사용해야하며 서버에서 조건부로 렌더링 하는 데에 사용해야한다.
       if(!router.isReady) return;
       getComments();
+
     },[ message ])
 
 
   return (
     <div>
-      <PostItem {...routeData}>
-                  <div className="my-4">
+      <SlugItem {...routeData} >
+              <div className="my-4">
                 <div className='flex'>
                     <input 
                         value={message} 
@@ -128,7 +125,7 @@ const PostDetails = () => {
                     ))}
                 </div>
             </div>
-      </PostItem>
+      </SlugItem>
     </div>
   )
 }

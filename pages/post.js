@@ -4,7 +4,6 @@ import {addDoc,collection,doc,serverTimestamp,updateDoc} from "firebase/firestor
 import { auth, db, storage } from "../utils/firebase";
 import {getDownloadURL,ref,uploadString,uploadBytes,} from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { toast } from "react-toastify";
 
 // select box
 import { Fragment } from "react";
@@ -20,6 +19,20 @@ const animatedComponents = makeAnimated();
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
+const  modules  = {
+  toolbar: [
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script:  "sub" }, { script:  "super" }],
+      ["blockquote", "code-block"],
+      [{ list:  "ordered" }, { list:  "bullet" }],
+      [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
+  ],
+};
 
 // datepicker
 import TextField from '@mui/material/TextField';
@@ -38,7 +51,7 @@ export default function Post() {
   const route = useRouter();
   const filePickerRef = useRef(null);
   const routeData = route.query;
-
+  console.log(routeData)
 
   // dateFicker
   const [value, setValue] = useState(null);
@@ -103,12 +116,15 @@ export default function Post() {
     { value: "Spring", label: "Spring" },
     { value: "go", label: "go" },
   ];
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState('');
+  
+  console.log(selectedOptions)
 
   const handleSelect = () => {
     console.log(selectedOptions);
   };
-  console.log(value)
+
+  
   async function uploadPost() {
     if (loadings) return;
 
@@ -116,9 +132,22 @@ export default function Post() {
 
     // query로 넘긴 id값이 있을때는 update
     
-    if (title?.hasOwnProperty("id")) {
-      const docRef = doc(db, "posts", post.id);
-      const updatedPost = { ...post, timestamp: serverTimestamp() };
+    if (routeData?.hasOwnProperty("id")) {
+      const docRef = doc(db, "posts", routeData.id);
+      const updatedPost = {
+        title,
+        text,
+        recruitment : selected.name,
+        player : selected2.name,
+        progress: selected3.name,
+        period: selected4.name,
+        stack : selectedOptions,
+        startday: dateFormat,
+        username: user.displayName,
+        user: user.uid,
+        avatar: user.photoURL,
+        timestamp: serverTimestamp(),
+      }
       const imageRef = ref(storage, `posts/${docRef.id}/image`);
       await uploadString(imageRef, selectedFile, "data_url").then(
         async (snapshot) => {
@@ -132,6 +161,7 @@ export default function Post() {
       return route.push("/");
     } else {
       // firestore에 저장
+
       const docRef = await addDoc(collection(db, "posts"), {
         title,
         text,
@@ -180,14 +210,13 @@ export default function Post() {
     if (loading) return;
     if (!user) route.push("/login");
     if (routeData.id) {
-      setPost({
-        text: routeData.text,
-        id: routeData.id,
-        caption: routeData.caption,
-      });
-      setChangeFile({
-        image: routeData.image,
-      });
+      // setTitle({
+      //   title : routeData.title 
+      // });
+      // setText({
+      //   text : routeData.text 
+      // })
+
     }
   };
 
@@ -198,7 +227,7 @@ export default function Post() {
 
   return (
     <div>
-      <div className="flex flex-col justify-start items-start h-[100%]">
+      <div className="flex flex-col justify-start items-start h-[100%] p-4">
         <div className="flex mb-16">
           <h1 className="text-2xl font-bold">
             1. 프로젝트 기본 정보를 입력해주세요.
@@ -466,16 +495,18 @@ export default function Post() {
               closeMenuOnSelect={false}
             />
           </div>
-          <div className="w-full">
-           <label className="text-xl">시작 날짜</label> 
+          <div className="w-full flex flex-wrap ">
+           <label className="text-xl mb-2">시작 날짜</label> 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label=""
               value={value}
-              className="w-full mt-4"
+              className="w-full"
+                                
               onChange={(newValue) => {
                 setValue(newValue);
               }}
+
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
@@ -521,7 +552,12 @@ export default function Post() {
           onChange={(e) => setTitle(e.target.value)}
         />
         <div className="w-full"> 
-          <ReactQuill className="w-full h-96" value={text} onChange={setText}/>
+          <ReactQuill 
+          className="w-full h-96" 
+          value={text} 
+          onChange={setText}
+          modules={modules}
+          />
         </div>
         <button
 
