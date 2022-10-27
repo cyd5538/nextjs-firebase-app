@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PostItem = ({children, stack, avatar, username, title, progress, recruitment, player, startday, image}) => {
-  console.log(stack)
+
   return (
     <div className='mb-8 p-6 max-w-md min-w-[47%] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700'>
       <div>
@@ -23,11 +23,11 @@ const PostItem = ({children, stack, avatar, username, title, progress, recruitme
           </div>
       </div>
       <div className='flex gap-2 flex-wrap mb-4 mt-2'>
-        {stack.map((sta) => (
+        {/* {stack?.map((sta) => (
           <div>
             {sta.value}
           </div>
-        ))}
+        ))} */}
       </div>
       {children}
     </div>
