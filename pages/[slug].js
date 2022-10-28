@@ -16,7 +16,7 @@ const PostDetails = () => {
   const router = useRouter();
   const routeData = router.query;
 
-  console.log(routeData)
+
   
   const submitMessage = async() => {
     

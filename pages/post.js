@@ -4,7 +4,7 @@ import {addDoc,collection,doc,serverTimestamp,updateDoc} from "firebase/firestor
 import { auth, db, storage } from "../utils/firebase";
 import {getDownloadURL,ref,uploadString,uploadBytes,} from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {toast} from 'react-toastify'
+
 // select box
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
@@ -486,6 +486,7 @@ export default function Post() {
             <label className="text-xl">기술 스택</label>
             <Select
               components={animatedComponents}
+              defaultValue={[options[0],options[1]]}
               isMulti
               options={options}
               onChange={(item) => setSelectedOptions(item)}
@@ -505,7 +506,6 @@ export default function Post() {
               label=""
               value={value}
               className="w-full"
-                                
               onChange={(newValue) => {
                 setValue(newValue);
               }}
