@@ -45,7 +45,8 @@ const  SlugItem = ({ children, avatar, username, title, progress, recruitment, p
                         <label className='text-md md:text-2xl font-bold text-gray-500 opacity-60'>예상 기간</label>
                         <div className='text-md md:text-2xl font-bold'>{period}</div>
                     </div>
-
+                    {/* DOM에서 innerHTML을 사용하기 위한 React의 대체 방법*/}
+                    <div dangerouslySetInnerHTML={{ __html: text }}></div>
                 </div>
              
             </div>

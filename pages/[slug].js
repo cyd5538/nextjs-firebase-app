@@ -84,7 +84,7 @@ const PostDetails = () => {
 
     },[ message ])
 
-
+    console.log(routeData)
   return (
     <div>
       <SlugItem {...routeData} >
