@@ -4,7 +4,7 @@ import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from "../../utils/firebase";
 
 
-const MypostEdit = ({children, id, avatar, userName, text}) => {
+const MypostEdit = ({children, id, avatar, userName, title}) => {
 
     // post 삭제
     const deletePost = async(id) => {
@@ -19,7 +19,7 @@ const MypostEdit = ({children, id, avatar, userName, text}) => {
                 <h2>{userName}</h2>
             </div>
             <div className='py-4'>
-                <p>{text}</p>
+                <p>{title}</p>
             </div>
 
             <div className="flex gap-4 justify-end">

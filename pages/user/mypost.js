@@ -30,7 +30,7 @@ const myPost = () => {
       <h1 className="font-bold text-xl mt-12">My Post</h1>
       {posts.map((post) => (
         <MypostEdit {...post} key={post.id}>
-          <Link href={{ pathname: `/${post.id}`, query: post }}>
+          <Link href={{pathname: '/post', query: post}} as='/post'>
               <button className="text-pink-600 flex items-center justify-center gap-2 py-2 text-sm">
                   <AiFillEdit className="text-2xl" /> Edit
               </button>

@@ -565,6 +565,7 @@ export default function Post() {
           />
         </div>
         <button
+          disabled={!text || !title || !selected2.name  || !selected3.name || !selected4.name || !selectedOptions || !dateFormat || !selected.name }
           onClick={uploadPost}
           className="w-full mt-20 mb-4 bg-gray-700 text-white p-2 shadow-md hover:brightness-125 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100"
         >
