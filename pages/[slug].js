@@ -84,7 +84,7 @@ const PostDetails = () => {
 
     },[ message ])
 
-    console.log(routeData)
+    console.log(routeData);
   return (
     <div>
       <SlugItem {...routeData} >
@@ -110,6 +110,7 @@ const PostDetails = () => {
                         username={message.userName}
                         message={message.message}
                         time={message.time}
+                        openchat={message.openchat}
                       >
                         {user?.uid === message.user ? 
                         (

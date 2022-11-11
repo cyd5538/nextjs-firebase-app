@@ -44,10 +44,9 @@ export default function Home() {
       setStackFilter([...stackFilter, stack])
     }
 
-  console.log(allposts.map((post) => post.stack.map((stack) => stack.value)))
-  console.log(stackFilter)
-  
-  return (
+  // console.log(allposts.map((post) => post.stack.map((stack) => stack.value).filter((a,x) => a === stackFilter[0])))
+
+  return (  
     <div>
       <Head>
         <title>Create Next App</title>
@@ -107,9 +106,9 @@ export default function Home() {
           >
             <li 
               onClick={() => PushStack('NodeJs')}  
-              className={stackFilter.filter((item)=>item == 'NodeJs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NODEJS} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'Nodejs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NODEJS} alt="home" width="40" height="40" 
             />
-                <span>NodeJs</span>
+                <span>Nodes</span>
             </li>
             <li 
               onClick={() => PushStack('Java')}  
@@ -152,6 +151,7 @@ export default function Home() {
 
         </div>
         <div className='flex gap-1 flex-wrap justify-around'>
+       
           {allposts?.map((post) => (
             <PostItem key={post.id} {...post}>
               <div className='flex gap-4 mb-4 flex-wrap'>

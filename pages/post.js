@@ -45,6 +45,7 @@ export default function Post() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState('')
   const [selectedFile, setSelectedFile] = useState(null);
+  const [openchat, setOpenchat] = useState('');
   const [changeFile, setChangeFile] = useState({ image: null });
   const [user, loading] = useAuthState(auth);
   const [loadings, setLoadings] = useState(false);
@@ -144,6 +145,7 @@ export default function Post() {
         username: user.displayName,
         user: user.uid,
         avatar: user.photoURL,
+        openchat,
         timestamp: serverTimestamp(),
       }
       const imageRef = ref(storage, `posts/${docRef.id}/image`);
@@ -174,6 +176,7 @@ export default function Post() {
         username: user.displayName,
         user: user.uid,
         avatar: user.photoURL,
+        openchat,
         timestamp: serverTimestamp(),
       });
 
@@ -515,6 +518,12 @@ export default function Post() {
           </LocalizationProvider>
           </div>
         </div>
+        <div className="w-full">
+            <label className="text-xl">연락 오픈채팅</label>
+            <div className="w-full pt-2 pb-2">
+              <input value={openchat} onChange={(e) => setOpenchat(e.target.value)} className="w-full bg-gray-100 pb-4 pt-4 text-xl pl-4" type="text" />
+            </div>
+          </div>
         <div className="mb-20">
           <h2 className="text-xl font-bold">썸네일 이미지를 넣어주세요</h2>
         </div>
