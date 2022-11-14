@@ -116,7 +116,6 @@ const PostDetails = () => {
                         (
                           <>
                             <button className='mr-2' onClick={() => deleteComment(message.time,message.message)}><AiOutlineDelete /></button>
-                            <button><AiOutlineEdit /></button>
                           </>
                         ) :
                         (

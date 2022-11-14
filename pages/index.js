@@ -44,7 +44,9 @@ export default function Home() {
       setStackFilter([...stackFilter, stack])
     }
 
-  // console.log(allposts.map((post) => post.stack.map((stack) => stack.value).filter((a,x) => a === stackFilter[0])))
+    console.log(allposts.filter((posts) => posts.stack.includes(stackFilter[0])));
+  
+    const filiterStack =  allposts.filter((posts) => posts.stack.includes(stackFilter[0]))
 
   return (  
     <div>
@@ -105,7 +107,7 @@ export default function Home() {
             className={toggleState === 2 ? "flex gap-4 mb-10 text-xl " : "hidden"}
           >
             <li 
-              onClick={() => PushStack('NodeJs')}  
+              onClick={() => PushStack('Nodejs')}  
               className={stackFilter.filter((item)=>item == 'Nodejs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NODEJS} alt="home" width="40" height="40" 
             />
                 <span>Nodes</span>
@@ -123,8 +125,8 @@ export default function Home() {
                 <span>Spring</span>
             </li>
             <li 
-              onClick={() => PushStack('Go')}  
-              className={stackFilter.filter((item)=>item == 'Go').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={GO} alt="home" width="40" height="40" 
+              onClick={() => PushStack('go')}  
+              className={stackFilter.filter((item)=>item == 'go').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={GO} alt="home" width="40" height="40" 
             />
                 <span>Go</span>
             </li>
@@ -151,20 +153,34 @@ export default function Home() {
 
         </div>
         <div className='flex gap-1 flex-wrap justify-around'>
-       
-          {allposts?.map((post) => (
+
+          {/* stackfilter에 값이 있으면 아래 함수로 둘러쌓인 데이터 보여주고 아니면 모든데이터 */}
+          {stackFilter[0] !== undefined ? 
+          <>
+          {filiterStack?.map((post) => (
             <PostItem key={post.id} {...post}>
-              <div className='flex gap-4 mb-4 flex-wrap'>
-                {post.stack.map((stack, index) => <div key={index} className='text-sm'>{stack.value}</div>)}
-              </div>
+              <div className='flex gap-4 mb-4 flex-wrap font-semibold text-xl'>{post.stack}</div>
               <Link href={{ pathname: `/${post.id}`, query: post  }} as={`/${post.id}`}>
-                
                 <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                   Comment <span className="font-bold">{post.comments?.length}</span>
                 </button>
               </Link>
             </PostItem>
           ))}
+          </> :
+          <>
+          {allposts?.map((post) => (
+            <PostItem key={post.id} {...post}>
+              <div className='flex gap-4 mb-4 flex-wrap'>{post.stack}</div>
+              <Link href={{ pathname: `/${post.id}`, query: post  }} as={`/${post.id}`}>
+                <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                  Comment <span className="font-bold">{post.comments?.length}</span>
+                </button>
+              </Link>
+            </PostItem>
+          ))} 
+          </>
+          }
 
         </div>
       </div>

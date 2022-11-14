@@ -22,13 +22,7 @@ const PostItem = ({children, stack, avatar, username, title, progress, recruitme
             <h2 className='font-500 text-sm'>{username}</h2>
           </div>
       </div>
-      <div className='flex gap-2 flex-wrap mb-4 mt-2'>
-        {/* {stack?.map((sta) => (
-          <div>
-            {sta.value}
-          </div>
-        ))} */}
-      </div>
+
       {children}
     </div>
   )

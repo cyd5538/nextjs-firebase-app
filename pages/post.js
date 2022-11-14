@@ -116,12 +116,7 @@ export default function Post() {
     { value: "Spring", label: "Spring" },
     { value: "go", label: "go" },
   ];
-  const [selectedOptions, setSelectedOptions] = useState('');
-
-
-  const handleSelect = () => {
-    console.log(selectedOptions);
-  };
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
 
   async function uploadPost() {
@@ -140,7 +135,7 @@ export default function Post() {
         player : selected2.name,
         progress: selected3.name,
         period: selected4.name,
-        stack : selectedOptions,
+        stack : selectedOptions?.map((stack) => stack.value).join(" "),
         startday: dateFormat,
         username: user.displayName,
         user: user.uid,
@@ -148,6 +143,7 @@ export default function Post() {
         openchat,
         timestamp: serverTimestamp(),
       }
+
       const imageRef = ref(storage, `posts/${docRef.id}/image`);
       if(selectedFile !== null){
         await uploadString(imageRef, selectedFile, "data_url").then(
@@ -171,7 +167,7 @@ export default function Post() {
         player : selected2.name,
         progress: selected3.name,
         period: selected4.name,
-        stack : selectedOptions,
+        stack : selectedOptions?.map((stack) => stack.value).join(" "),
         startday: dateFormat,
         username: user.displayName,
         user: user.uid,
