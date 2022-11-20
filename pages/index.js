@@ -44,7 +44,6 @@ export default function Home() {
       setStackFilter([...stackFilter, stack])
     }
 
-    console.log(allposts.filter((posts) => posts.stack.includes(stackFilter[0])));
   
     const filiterStack =  allposts.filter((posts) => posts.stack.includes(stackFilter[0]))
 
@@ -57,17 +56,17 @@ export default function Home() {
       </Head>
 
       <main>
-      <div className='my-12 text-lg font-midium'>
+      <div className='my-12 text-lg font-midium '>
         <div>
           <ul className='flex gap-2 text-2xl mb-10'>
             <li 
-            className={toggleState === 1 ? "font-bold text-purple-800 cursor-pointer " : "text-black cursor-pointer"}
+            className={toggleState === 1 ? "font-bold text-purple-800 dark:text-white cursor-pointer " : "text-black dark:text-gray-400 cursor-pointer"}
             onClick={() => toggleTab(1)}
             >
               프론트엔드
             </li>
             <li
-            className={toggleState === 2 ? "font-bold text-purple-800 cursor-pointer " : "text-black cursor-pointer"}
+            className={toggleState === 2 ? "font-bold text-purple-800 dark:text-white cursor-pointer " : "text-black dark:text-gray-400 cursor-pointer"}
             onClick={() => toggleTab(2)}
             >
               백엔드
@@ -76,75 +75,75 @@ export default function Home() {
         </div>
         <div>
           <ul
-            className={toggleState === 1 ? "flex gap-4 mb-10 text-xl " : "hidden"}
+            className={toggleState === 1 ? "flex flex-wrap gap-4 mb-10 text-xl " : "hidden"}
           >
             <li 
               onClick={() => PushStack('JavaScript')} 
-              className={stackFilter.filter((item)=>item == 'JavaScript').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={JAVASCRIPT} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'JavaScript').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={JAVASCRIPT} alt="home" width="40" height="40" 
             />
                 <span>JavaScript</span>
             </li>
             <li 
               onClick={() => PushStack('TypeScript')} 
-              className={stackFilter.filter((item)=>item == 'TypeScript').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={TYPESCRIPT} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'TypeScript').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={TYPESCRIPT} alt="home" width="40" height="40" 
             />
                 <span>TypeScript</span>
             </li>
             <li 
               onClick={() => PushStack('React')} 
-              className={stackFilter.filter((item)=>item == 'React').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={REACT} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'React').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={REACT} alt="home" width="40" height="40" 
             />
                 <span>React</span>
             </li>
             <li 
               onClick={() => PushStack('Nextjs')}  
-              className={stackFilter.filter((item)=>item == 'Nextjs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NEXTJS} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'Nextjs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NEXTJS} alt="home" width="40" height="40" 
             />
                 <span>Nextjs</span>
             </li>
           </ul>
           <ul
-            className={toggleState === 2 ? "flex gap-4 mb-10 text-xl " : "hidden"}
+            className={toggleState === 2 ? "flex gap-4 flex-wrap mb-10 text-xl " : "hidden"}
           >
             <li 
               onClick={() => PushStack('Nodejs')}  
-              className={stackFilter.filter((item)=>item == 'Nodejs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={NODEJS} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'Nodejs').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2  rounded-2xl'}><Image src={NODEJS} alt="home" width="40" height="40" 
             />
                 <span>Nodes</span>
             </li>
             <li 
               onClick={() => PushStack('Java')}  
-              className={stackFilter.filter((item)=>item == 'Java').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={JAVA} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'Java').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={JAVA} alt="home" width="40" height="40" 
             />
                 <span>Java</span>
             </li>
             <li 
               onClick={() => PushStack('Spring')}  
-              className={stackFilter.filter((item)=>item == 'Spring').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={SPRING} alt="home" width="40" height="40"
+              className={stackFilter.filter((item)=>item == 'Spring').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={SPRING} alt="home" width="40" height="40"
             />
                 <span>Spring</span>
             </li>
             <li 
               onClick={() => PushStack('go')}  
-              className={stackFilter.filter((item)=>item == 'go').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={GO} alt="home" width="40" height="40" 
+              className={stackFilter.filter((item)=>item == 'go').length === 1 ? "flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl border-gray-100 dark:border-red-500 text-gray-300" : 'flex items-center gap-2 cursor-pointer p-2 border-2 rounded-2xl'}><Image src={GO} alt="home" width="40" height="40" 
             />
                 <span>Go</span>
             </li>
           </ul>
         </div>
-        <div className='mb-10 flex items-center gap-8'>
-          <ul className='flex gap-4'>
+        <div className='mb-10 flex items-center flex-wrap gap-8'>
+          <ul className='flex flex-wrap gap-4'>
             {stackFilter.map((stack) => 
             <li
             key={stack} 
             onClick={() => setStackFilter(stackFilter.filter((item)=> item!= stack)) }
-            className='bg-gray-400 p-2 text-white cursor-pointer'
+            className='bg-gray-400 dark:bg-purple-900 p-2 text-white cursor-pointer'
             >
               {stack}
             </li>)}
           </ul>
           {stackFilter.length >= 1 ? 
-          <button onClick={() => setStackFilter([])} className='bg-gray-100 p-2 text-black cursor-pointer'>
+          <button onClick={() => setStackFilter([])} className='bg-gray-100 dark:bg-purple-800 dark:text-white p-2 text-black cursor-pointer'>
             필터 초기화 📵
           </button>
           :
@@ -159,7 +158,7 @@ export default function Home() {
           <>
           {filiterStack?.map((post) => (
             <PostItem key={post.id} {...post}>
-              <div className='flex gap-4 mb-4 flex-wrap font-semibold text-xl'>{post.stack}</div>
+              <div className='flex gap-4 mb-4 flex-wrap font-semibold text- xl'>{post.stack}</div>
               <Link href={{ pathname: `/${post.id}`, query: post  }} as={`/${post.id}`}>
                 <button type="button" className="text-white bg-purple-400 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                   Comment <span className="font-bold">{post.comments?.length}</span>

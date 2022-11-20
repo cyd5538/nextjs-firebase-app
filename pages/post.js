@@ -221,6 +221,9 @@ export default function Post() {
       setChangeFile({
         image: routeData.image
       })
+      setOpenchat(
+        routeData.openchat
+      )
     }
   };
   

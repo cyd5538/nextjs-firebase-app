@@ -5,10 +5,12 @@ import {ToastContainer} from 'react-toastify';
 
 function MyApp({ Component, pageProps }) {
   return(
-    <Layout>
-      <ToastContainer limit={1}/>
-      <Component {...pageProps} />
-    </Layout>
+    <div className='dark:bg-slate-900 dark:text-white'>
+      <Layout>
+        <ToastContainer limit={1}/>
+        <Component {...pageProps} />
+      </Layout>
+    </div>
   ) 
 }
 

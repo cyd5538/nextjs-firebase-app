@@ -1,39 +1,64 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import {useAuthState} from 'react-firebase-hooks/auth'; 
-import {auth} from '../../utils/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../utils/firebase';
 import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { signOut } from "firebase/auth";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineEdit } from "react-icons/ai";
 import { IoIosLogOut } from "react-icons/io";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 
 export default function NavbarDropdown() {
   const route = useRouter();
   const [user, loading] = useAuthState(auth);
+  const [theme, setTheme] = useState("light");
+  const element = document.documentElement;
 
-    // 로그아웃 
-    function logout(){
-        return signOut(auth);
+  // 로그아웃 
+  function logout() {
+    return signOut(auth);
+  }
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      route.push('/login')
+    } catch (err) {
+      console.log("error", err);
     }
-    
-    const handleLogout = async () => {
-        try {
-          await logout();
-          route.push('/login')
-        } catch(err) {
-          console.log("error",err);
-        }
-    };
-    
+  };
+
+  // 다크모드
+  useEffect(() => {
+    switch (theme) {
+      case "dark":
+        element.classList.add("dark");
+        break;
+      case "light":
+        element.classList.remove("dark");
+        break;
+      default:
+        break;
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    if (localStorage.getItem("theme")) {
+      const theme = JSON.parse(localStorage.getItem("theme"));
+      setTheme(theme);
+    }
+  }, [])
+
+
   return (
     <li>
       <Menu as="div" className="relative inline-block text-left">
         <div>
-            <Menu.Button>
-                <img className='border-cyan-500 border-2 h-14 w-14 rounded-full'src={user.photoURL} alt="user" />
-            </Menu.Button>
+          <Menu.Button>
+            <img className='border-cyan-500 border-2 h-14 w-14 rounded-full' src={user.photoURL} alt="user" />
+          </Menu.Button>
         </div>
         <Transition
           as={Fragment}
@@ -49,9 +74,8 @@ export default function NavbarDropdown() {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
                       <CgProfile
@@ -65,7 +89,7 @@ export default function NavbarDropdown() {
                       />
                     )}
                     <Link href="/user/profile">
-                        프로필 변경
+                      프로필 변경
                     </Link>
                   </button>
                 )}
@@ -73,9 +97,8 @@ export default function NavbarDropdown() {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
                       <AiOutlineEdit
@@ -99,9 +122,8 @@ export default function NavbarDropdown() {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={handleLogout}
                   >
                     {active ? (
@@ -113,10 +135,30 @@ export default function NavbarDropdown() {
                       <IoIosLogOut
                         className="mr-2 h-5 w-5 text-purple-800"
                         aria-hidden="true"
-                        
+
                       />
                     )}
                     로그아웃
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+
+                  >
+                    {theme === "dark" ? <div className='flex justify-center items-center text-center w-full text-xl' onClick={() => {
+                      setTheme('light')
+                      localStorage.setItem("theme", JSON.stringify("light"));
+                    }}><BsFillSunFill /></div> : <div className='flex justify-center items-center text-center w-full text-xl' onClick={() => {
+                      setTheme('dark')
+                      localStorage.setItem("theme", JSON.stringify("dark"));
+                    }}><BsFillMoonFill /></div>}
+
                   </button>
                 )}
               </Menu.Item>
