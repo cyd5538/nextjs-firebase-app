@@ -13,7 +13,7 @@ const MypostEdit = ({children, id, avatar, userName, title}) => {
     }
 
     return (
-        <div className='bg-white p-8 border-b-2 rounded-lg'>
+        <div className='bg-white dark:bg-blue-900 mt-4 dark:text-white p-8 border-b-2 rounded-lg'>
             <div className='flex items-center gap-2'>
                 <img src={avatar} className="w-16 h-16 rounded-full" />
                 <h2>{userName}</h2>

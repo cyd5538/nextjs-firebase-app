@@ -41,7 +41,7 @@ const Login = () => {
   }, [user])
 
   return (
-    <div className='shadow-xl mt-32 p-10 text-gray-800 rounded-lg'>
+    <div className='shadow-xl mt-32 p-10 text-gray-800 rounded-lg h-screen'>
     <h2 className='text-2xl font-bold'>Join</h2>
     <div className='py-4'>
         <button onClick={GoogleLogin} className='text-white bg-gray-800 w-full rounded-lg flex align-middle p-4 gap-2'>

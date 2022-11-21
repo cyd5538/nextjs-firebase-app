@@ -18,7 +18,7 @@ const Profile = () => {
   },[])
 
   return (
-    <div className="pb-4">
+    <div className="pb-4 h-screen">
       <ProfileNameEdit />
       <ProfileImageEdit />
     </div>

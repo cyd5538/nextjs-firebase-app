@@ -485,14 +485,14 @@ export default function Post() {
         </div>
         <div className="w-full flex gap-4 mb-10">
           <div className="w-full">
-            <label className="text-xl">기술 스택</label>
+            <label className="text-xl ">기술 스택</label>
             <Select
               components={animatedComponents}
               defaultValue={[options[0],options[1]]}
               isMulti
               options={options}
               onChange={(item) => setSelectedOptions(item)}
-              className="select relative w-full cursor-default rounded-lg bg-white py-6 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+              className="select relative w-full cursor-default rounded-lg text-black bg-white py-6 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
               isClearable={true}
               isSearchable={true}
               isDisabled={false}
@@ -507,7 +507,7 @@ export default function Post() {
             <DatePicker
               label=""
               value={value}
-              className="w-full"
+              className="w-full text-white dark:bg-white"
               onChange={(newValue) => {
                 setValue(newValue);
               }}
@@ -518,8 +518,8 @@ export default function Post() {
           </div>
         </div>
         <div className="w-full">
-            <label className="text-xl">연락 오픈채팅</label>
-            <div className="w-full pt-2 pb-2">
+            <label className="text-xl ">연락 오픈채팅</label>
+            <div className="w-full pt-2 pb-2 dark:text-black">
               <input value={openchat} onChange={(e) => setOpenchat(e.target.value)} className="w-full bg-gray-100 pb-4 pt-4 text-xl pl-4" type="text" />
             </div>
           </div>
@@ -577,7 +577,7 @@ export default function Post() {
           onClick={uploadPost}
           className="w-full mt-20 mb-4 bg-gray-700 text-white p-2 shadow-md hover:brightness-125 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100"
         >
-          {routeData?.hasOwnProperty("id") ? <div>Edit Post</div> : <div>Upload Post</div>}
+          {routeData?.hasOwnProperty("id") ? <div className="dark:text-black ">Edit Post</div> : <div className="dark:text-black ">Upload Post</div>}
         </button>
       </div>
     </div>

@@ -25,8 +25,16 @@ const MyPost = () => {
       getData();
     }, [user, loading])
 
+
+  if(posts.length < 1){
+    return (<div className="h-screen">
+      <h1 className="font-bold text-xl mt-12 text-center">글을 올리지 않았습니다.</h1>
+    </div>
+    )
+  }
+
   return (
-    <div>
+    <div className="h-screen">
       <h1 className="font-bold text-xl mt-12">My Post</h1>
       {posts.map((post) => (
         <MypostEdit {...post} key={post.id}>
