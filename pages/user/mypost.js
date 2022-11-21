@@ -6,7 +6,7 @@ import { auth,db } from "../../utils/firebase";
 import { AiFillEdit } from 'react-icons/ai';
 import Link from 'next/link';
 
-const myPost = () => {
+const MyPost = () => {
     const [posts, setPosts] = useState([]);
     const [user, loading] = useAuthState(auth);
 
@@ -41,4 +41,4 @@ const myPost = () => {
   );
 };
 
-export default myPost;
+export default MyPost;
